@@ -17,7 +17,7 @@ Object.assign(Blockbench, {
 			}
 			if (options.extensions[0] === 'image/*') {
 				options.type = 'Images'
-				options.extensions = ['png', 'jpg', 'jpeg', 'bmp', 'tiff', 'tif', 'gif']
+				options.extensions = ['png', 'jpg', 'jpeg', 'bmp', 'tiff', 'tif', 'gif', 'ase', 'aseprite']
 			}
 			if (!options.startpath && options.resource_id) {
 				options.startpath = StateMemory.dialog_paths[options.resource_id]
@@ -170,6 +170,20 @@ Object.assign(Blockbench, {
 								}
 							})
 
+						} else if ((extension === 'ase') || (extension === 'aseprite')) {
+							var ase_loader = new Aseprite()
+							ase_loader.open(file, () => {
+								retsults[this_i] = {
+									name: pathToName(file, true),
+									path: file,
+									content: ase_loader.getDataUrl()
+								}
+
+								result_count++;
+								if (result_count === files.length) {
+									cb(results)
+								}
+							})
 						} else {
 							results[this_i] = {
 								name: pathToName(file, true),

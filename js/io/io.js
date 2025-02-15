@@ -2,7 +2,7 @@
 function setupDragHandlers() {
 	Blockbench.addDragHandler(
 		'texture',
-		{extensions: ['png', 'tga'], propagate: true, readtype: 'image', condition: () => !Dialog.open},
+		{extensions: ['png', 'tga', 'ase', 'aseprite'], propagate: true, readtype: 'image', condition: () => !Dialog.open},
 		function(files, event) {
 			loadImages(files, event)
 		}
